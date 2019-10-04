@@ -1,0 +1,230 @@
+\documentclass[12pt,dvipdfmx,svgnames,uplatex,aspectratio=169]{beamer}
+% \documentclass[12pt,dvipdfmx,svgnames,uplatex,aspectratio=169,handout]{beamer}
+%
+% ===========================================
+% フォント設定
+% ===========================================
+\usepackage{hyperref}  % 図・表・参考文献へのリンク
+% \usepackage{pxjahyper}  % 図・表・参考文献へのリンク
+\usepackage[utf8]{inputenc} % utf-8を使うためのパッケージ
+\usepackage{indentfirst}
+\usepackage{times} % Use the times font
+% \usepackage{palatino} % Uncomment to use the Palatino font
+\usepackage{otf, url}
+\renewcommand{\kanjifamilydefault}{\gtdefault}% 和文をゴシックに
+\usepackage{textgreek}
+% ソースコードの表示
+\usepackage{listings}
+\lstset{
+  %% language={C}, %プログラミング言語によって変える。
+  basicstyle={\ttfamily},
+  keywordstyle={\color{blue}},
+  commentstyle={\color{green}},
+  stringstyle=\color{red},
+  tabsize=2,
+  %% breaklines=true, %折り返し
+}
+%
+% ===========================================
+% 図・表関係
+% ===========================================
+% \usepackage[draft]{graphicx}
+\usepackage{graphicx}
+\graphicspath{{./pics/}}  % \includegraphicsで参照するディレクトリ
+\usepackage{grffile}
+\usepackage[dvipdfmx]{movie15_dvipdfmx}  % To imput movies
+\usepackage{xcolor} % Specify colors by their 'svgnames', for a full list of all colors available see here: http://www.latextemplates.com/svgnames-colors
+\usepackage{here}
+\usepackage{booktabs} % 表の横罫線
+\usepackage{lscape}  % 表などを90度回転させる
+\usepackage{longtable} % ページをまたぐ表の作成
+\usepackage{subfig}
+%
+\usepackage{multicol}
+\setlength{\columnsep}{3zh}
+%
+% ===========================================
+% 数学記号
+% ===========================================
+\usepackage{bm, amsfonts, amsmath, amsthm, amssymb, mathabx, ascmac, braket}
+\usepackage{siunitx}  %SI単位系を上手くやってくれる:\SI{数値}{単位}，\si{単位}
+%
+% ===========================================
+% 参考文献
+% ===========================================
+\usepackage[url=false,isbn=false,doi=false]{biblatex}
+% \addbibresource{./bib_textbooks.bib}  % 教科書など
+% \addbibresource{./bib_articles.bib}  % 論文など
+%
+% ===========================================
+% 独自スタイルの導入
+% ===========================================
+\usepackage{/home/ryo/.config/LaTeX/mystyle_beamer}
+\newcommand{\git}[1]{{\colorbox{WhiteSmoke}{\texttt{#1}}}}  % gitコマンドを薄い灰色の背景とtypewriterフォントで表記
+%
+% ===========================================
+% 表紙の記述
+% ===========================================
+\title{非情報系理系院生のための \\
+  モダンな開発環境づくり}
+\subtitle{その1. Git/GitHubを使ったソースコード管理}
+\author{荒木 亮}
+\institute{阪大院基礎工・後藤研}
+\date{\today}
+
+% +++++++++++++++++++++++++++++++++++++++++++
+% 本文
+% +++++++++++++++++++++++++++++++++++++++++++
+
+\begin{document}
+\frame{\maketitle}
+\begin{frame}{もくじ}
+  \tableofcontents
+\end{frame}
+
+% ===========================================
+% 以下，スライドを記述する
+% ===========================================
+\section{目標}
+\begin{frame}{\insertsection}
+  \begin{screen}
+    \centering
+    ソースコードやLaTeXのバージョンを，Git/GitHubで管理する
+  \end{screen}
+
+  \begin{itemize}
+    \item Git初心者が，「ファイル名に日付をつけてバックアップ」\\をGitで代替できるようになることをめざす
+  \end{itemize}
+
+  \begin{alertblock}{説明しないこと}
+    \begin{itemize}
+      \item \git{branch} を使った同時並行的な開発
+      \item \git{pull request} を使ったチームでの開発
+      \item その他色々ややこしいコマンド
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+\section{Gitの構造}
+\begin{frame}{\insertsection}
+  \begin{screen}
+    \begin{itemize}
+      \item 作業ツリー
+      \item ステージングエリア
+      \item ローカルリポジトリ
+      \item リモートリポジトリ
+    \end{itemize}
+    を表す図を追加
+  \end{screen}
+\end{frame}
+
+\begin{frame}{\insertsection}
+  \begin{columns}[T] % 上辺をあわせる
+    \begin{column}{0.5\textwidth}
+      \begin{block}{作業ツリー}
+        block
+      \end{block}
+      \begin{block}{ステージングエリア}
+        block
+      \end{block}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{block}{ローカルリポジトリ}
+        block
+      \end{block}
+      \begin{block}{リモートリポジトリ}
+        block
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{Gitのコマンド}
+\begin{frame}{\insertsection}
+  \begin{columns}[T] % 上辺をあわせる
+    \begin{column}{0.5\textwidth}
+      \begin{block}{\git{git add}}
+        block
+      \end{block}
+      \begin{block}{\git{git commit}}
+        block
+      \end{block}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{block}{\git{git push}}
+        block
+      \end{block}
+      \begin{block}{\git{git pull}}
+        block
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{分散型バージョン管理}
+\begin{frame}{なんでこんな難しいんや：\insertsection}
+  \begin{columns}[c] % 中央をあわせる
+    \begin{column}{0.5\textwidth}
+      \begin{screen}
+        クラウドサービスとGitの\\差異を表す図
+      \end{screen}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{block}{commit}
+        block
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{なぜGitを使うのか}
+\begin{frame}{\insertsection}
+  \texttt{git\_tutorial.md}から資料を作成する
+\end{frame}
+
+\section{今日から始めるGit生活}
+\begin{frame}{\insertsection}
+  \begin{enumerate}
+    \item GitHubでアカウント作成
+    \item Education planの作成
+    \item 研究用リポジトリの作成
+    \item コードを保存しているディレクトリを登録
+    \item ファイル編集\(\to\) \git{add} \(\to\) \git{commit} \(\to\) \git{push}
+    \begin{itemize}
+      \item[※] 見返してわかりやすい「commitメッセージ」をつける
+    \end{itemize}
+    \item GitHubのページを確認し，コードが変更されていることを確認
+  \end{enumerate}
+\end{frame}
+
+\section{便利なGitコマンド}
+\begin{frame}{\insertsection}
+  \begin{columns}[T] % 上辺をあわせる
+    \begin{column}{0.5\textwidth}
+      \begin{block}{\git{git checkout .}}
+        block
+      \end{block}
+      \begin{block}{\git{git stash}}
+        block
+      \end{block}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{block}{\git{git cinnut --amend}}
+        block
+      \end{block}
+      \begin{block}{\git{git reflog}}
+        block
+      \end{block}
+    \end{column}
+  \end{columns}
+  その他， \git{git revert} \git{git reset}
+
+  gitコマンドへのオプション，\texttt{.gitignore}
+\end{frame}
+
+\section{リンク集}
+\begin{frame}{\insertsection}
+  \texttt{git\_tutorial.md}から資料を作成する
+\end{frame}
+
+\end{document}
