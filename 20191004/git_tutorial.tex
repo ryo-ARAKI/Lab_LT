@@ -19,7 +19,7 @@
 % 独自スタイルの導入
 % ===========================================
 \usepackage{/home/ryo/.config/LaTeX/mystyle_beamer}
-\newcommand{\git}[1]{{\colorbox{WhiteSmoke}{\texttt{#1}}}}  % gitコマンドを薄い灰色の背景とtypewriterフォントで表記
+\newcommand{\git}[1]{{\colorbox{WhiteSmoke}{\texttt{\textbf{#1}}}}}  % gitコマンドを薄い灰色の背景とtypewriterフォントで表記
 %
 % ===========================================
 % 表紙の記述
@@ -66,15 +66,11 @@
 
 \section{Gitの構造}
 \begin{frame}{\insertsection}
-  \begin{screen}
-    \begin{itemize}
-      \item 作業ツリー
-      \item ステージングエリア
-      \item ローカルリポジトリ
-      \item リモートリポジトリ
-    \end{itemize}
-    を表す図を追加
-  \end{screen}
+  \centering
+  \includegraphics[bb=0.000000 0.000000 979.966736 524.329163, width=120mm]{./pics/git_structure.pdf}
+  \begin{flushright}
+    \scriptsize{Figures from: \href{https://icon-icons.com/ja/}{icon-icons.com}}
+  \end{flushright}
 \end{frame}
 
 \begin{frame}{\insertsection}
@@ -94,6 +90,14 @@
 
 \section{Gitのコマンド}
 \begin{frame}{\insertsection}
+  \centering
+  \includegraphics[bb=0.000000 0.000000 979.966736 524.329163, width=120mm]{./pics/git_structure_command.pdf}
+  \begin{flushright}
+    \scriptsize{Figures from: \href{https://icon-icons.com/ja/}{icon-icons.com}}
+  \end{flushright}
+\end{frame}
+
+\begin{frame}{\insertsection}
   \begin{block}{\git{git add}}
     作業ツリーで編集したファイルの変更点をステージングエリアに追加
   \end{block}
@@ -109,12 +113,14 @@
 \end{frame}
 
 \section{分散型バージョン管理}
-\begin{frame}{なんでこんな難しいんや：\insertsection}
+\begin{frame}{\insertsection}
   \begin{columns}[c] % 中央をあわせる
     \begin{column}{0.5\textwidth}
-      \begin{screen}
-        クラウドサービスとGitの\\差異を表す図
-      \end{screen}
+      \includegraphics[bb=0.000000 0.000000 600.000000 316.000000, width=60mm]{./pics/multi.png}
+
+      \includegraphics[bb=0.000000 0.000000 589.565143 347.771411, width=60mm]{./pics/intro2_2.png}
+
+      \scriptsize{Figures from: \href{https://owncloud.jp}{ownCloud}，\href{https://backlog.com/ja/git-tutorial/}{サルでも分かるGit入門}}
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{block}{自動更新（クラウドサービス）}
