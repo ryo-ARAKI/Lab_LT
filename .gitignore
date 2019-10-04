@@ -1,0 +1,10 @@
+*.dvi
+*.nav
+*.snm
+*.gz
+*.bbl
+*.fls
+*.log
+*.aux
+*.xml
+*.vrb
