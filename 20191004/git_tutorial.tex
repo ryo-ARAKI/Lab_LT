@@ -2,52 +2,11 @@
 % \documentclass[12pt,dvipdfmx,svgnames,uplatex,aspectratio=169,handout]{beamer}
 %
 % ===========================================
-% フォント設定
-% ===========================================
-\usepackage{hyperref}  % 図・表・参考文献へのリンク
-% \usepackage{pxjahyper}  % 図・表・参考文献へのリンク
-\usepackage[utf8]{inputenc} % utf-8を使うためのパッケージ
-\usepackage{indentfirst}
-\usepackage{times} % Use the times font
-% \usepackage{palatino} % Uncomment to use the Palatino font
-\usepackage{otf, url}
-\renewcommand{\kanjifamilydefault}{\gtdefault}% 和文をゴシックに
-\usepackage{textgreek}
-% ソースコードの表示
-\usepackage{listings}
-\lstset{
-  %% language={C}, %プログラミング言語によって変える。
-  basicstyle={\ttfamily},
-  keywordstyle={\color{blue}},
-  commentstyle={\color{green}},
-  stringstyle=\color{red},
-  tabsize=2,
-  %% breaklines=true, %折り返し
-}
-%
-% ===========================================
 % 図・表関係
 % ===========================================
 % \usepackage[draft]{graphicx}
 \usepackage{graphicx}
 \graphicspath{{./pics/}}  % \includegraphicsで参照するディレクトリ
-\usepackage{grffile}
-\usepackage[dvipdfmx]{movie15_dvipdfmx}  % To imput movies
-\usepackage{xcolor} % Specify colors by their 'svgnames', for a full list of all colors available see here: http://www.latextemplates.com/svgnames-colors
-\usepackage{here}
-\usepackage{booktabs} % 表の横罫線
-\usepackage{lscape}  % 表などを90度回転させる
-\usepackage{longtable} % ページをまたぐ表の作成
-\usepackage{subfig}
-%
-\usepackage{multicol}
-\setlength{\columnsep}{3zh}
-%
-% ===========================================
-% 数学記号
-% ===========================================
-\usepackage{bm, amsfonts, amsmath, amsthm, amssymb, mathabx, ascmac, braket}
-\usepackage{siunitx}  %SI単位系を上手くやってくれる:\SI{数値}{単位}，\si{単位}
 %
 % ===========================================
 % 参考文献
@@ -209,7 +168,7 @@
       \end{block}
     \end{column}
     \begin{column}{0.5\textwidth}
-      \begin{block}{\git{git cinnut --amend}}
+      \begin{block}{\git{git commit --amend}}
         block
       \end{block}
       \begin{block}{\git{git reflog}}
