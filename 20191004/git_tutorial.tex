@@ -19,7 +19,9 @@
 % 独自スタイルの導入
 % ===========================================
 \usepackage{/home/ryo/.config/LaTeX/mystyle_beamer}
-\newcommand{\git}[1]{{\colorbox{WhiteSmoke}{\texttt{\textbf{#1}}}}}  % gitコマンドを薄い灰色の背景とtypewriterフォントで表記
+\newcommand{\git}[1]{{\colorbox{WhiteSmoke}{\texttt{\textbf{#1}}}}}  % gitコマンドを薄い灰色の背景と太字のtypewriterフォントで表記
+\newcommand{\stress}[1]{{\colorbox{LightSkyBlue}{#1}}}  % 強調箇所
+\setbeamercolor{advanced}{fg=black,bg=Wheat}  % 発展した情報を扱うための色付きbox
 %
 % ===========================================
 % 表紙の記述
@@ -52,15 +54,18 @@
   \end{screen}
 
   \begin{itemize}
-    \item Gitに初めて触れる人が，「ファイル名に日付をつけてバックアップ」\\をGitで代替できるようになることをめざす
+    \item Gitに初めて触れる人が，「ファイル名に日付をつけてバックアップ」\\「ownCloudに全部おいてる」をGitで代替できるようになることをめざす
   \end{itemize}
 
   \begin{alertblock}{説明しないこと}
     \begin{itemize}
       \item \git{branch} を使った同時並行的な開発
-      \item \git{pull request} を使ったチームでの開発
-      \item その他色々ややこしいコマンド
+      \item \git{fork}\(\to\)\git{pull request}\(\to\)\git{merge} を使ったプロジェクト管理
+      \item \git{issue}，\git{Wiki}，\git{Gist}などの便利な機能
     \end{itemize}
+    \begin{beamercolorbox}[rounded=true]{advanced}
+      \footnotesize{この色の部分は発展的なトピックを扱う}
+    \end{beamercolorbox}
   \end{alertblock}
 \end{frame}
 
@@ -75,16 +80,24 @@
 
 \begin{frame}{\insertsection}
   \begin{block}{作業ツリー}
-    作業をおこなうディレクトリ．普通の意味の「フォルダ」
+    作業をおこなうディレクトリ．
+    普通の意味の「フォルダ」
   \end{block}
   \begin{block}{ステージングエリア}
     作業ツリーで編集したファイルの変更点を「とりあえず」保管しておく場所
   \end{block}
+  \begin{block}{リポジトリ}
+    ファイルを修正履歴も含め保存する場所
+  \end{block}
   \begin{block}{ローカルリポジトリ}
-    ステージングエリアにある変更点を「コミット」としてまとめ，記録する場所
+    ローカルに保存されているリポジトリ
+
+    ステージングエリアに登録された変更点の集合を「コミット」として保存する
   \end{block}
   \begin{block}{リモートリポジトリ}
-    ソースコードなどをまとめた「リポジトリ」を保存・公開する場所
+    サーバで保存，公開されているリポジトリ
+
+    ユーザのローカルリポジトリと通信し，情報を更新する
   \end{block}
 \end{frame}
 
@@ -108,7 +121,15 @@
     ローカルリポジトリに記録されたコミット群をリモートリポジトリに送信
   \end{block}
   \begin{block}{\git{git pull}}
-    リモートリポジトリの最新の情報をローカルリポジトリに適用
+    作業ツリーをリモートリポジトリの最新の情報で更新
+
+    \begin{beamercolorbox}[rounded=true]{advanced}
+      \footnotesize{
+        ローカルリポジトリをリモートリポジトリと同期する\git{fetch}と，
+
+        作業ツリーとローカルリポジトリを統合する\git{merge}コマンドを一つにしたもの
+      }
+    \end{beamercolorbox}
   \end{block}
 \end{frame}
 
@@ -124,15 +145,21 @@
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{block}{自動更新（クラウドサービス）}
-        変更箇所を自動でリモートに送る
+        ローカルの変更箇所を\stress{自動で}\\リモートに送信
       \end{block}
-      \begin{block}{commit（Git/GitHub）}
-        変更箇所を任意の粒度でまとめ，名前やコメントをつけて管理するもの
+      \hspace{\baselineskip}
+      \begin{block}{\git{commit}（Git/GitHub）}
+        変更箇所を\stress{任意の段階でまとめ}，\\コメントをつけてリモートに送信
         \begin{itemize}
           \item 編集履歴がわかりやすい
           \item 昔の状態の確認や巻き戻しが簡単
           \item 編集が競合したとき，解決が簡単
         \end{itemize}
+        \begin{beamercolorbox}[rounded=true]{advanced}
+          \footnotesize{
+            Gitはファイル情報をリポジトリ内の\texttt{.git/}以下で管理している
+            }
+        \end{beamercolorbox}
       \end{block}
     \end{column}
   \end{columns}
@@ -142,18 +169,18 @@
 \begin{frame}{\insertsection}
   \begin{itemize}
     \item 自動で保存されてしまうクラウドサービスだと…
-    \item[] 「前の状態に戻したいんだけど，あれっていつのバージョンだっけ？」
+    \item[] 「前の状態に戻したいけど，いつのを見ればいいんだろう？」
     \item 古い状態を記録しておけないと…
-    \item[] 「今はこの関数やサブルーチンを使ってないけど，また使うかも\\しれないしとりあえずコメントアウトして残しておこう」
+    \item[] 「今は使っていない関数/サブルーチンだけど，また使うかもしれないしとりあえずコメントアウトして残しておこう」
     \item 共同作業で競合がおきてしまうと…
     \item[] 「今からこのファイル編集するから触らないでね！」
-    \item[] 「最新のファイルってどこに置いてる？」
+    \item[] 「最新のファイルって誰が持ってる？/どこに置いてる？」
   \end{itemize}
 
   \begin{block}{Gitを使うべきでないファイル}
     \begin{itemize}
       \item 一度作成したらもう編集しないデータ（実験結果，計算データ）
-      \item[] \(\to\)（普通の意味での）バックアップで対処する
+      \item[] \(\to\)（普通の意味での）バックアップで対処
       % \item ソースコード，論文データなど，継続的に改良していくデータ → （Gitなどを使った）バージョン管理
     \end{itemize}
   \end{block}
@@ -163,38 +190,46 @@
 \begin{frame}{\insertsection}
   \begin{enumerate}
     \item GitHubでアカウント作成
-    \item Education planの作成
+    \item Github Educationの申請
     \begin{itemize}
-      \item[※] 「非公開リポジトリ」が無制限に作成できる
+      \item[※] 有償アカウントと同等の機能が利用できる
     \end{itemize}
     \item 研究用リポジトリの作成
     \begin{itemize}
-      \item[※] 別のプロジェクトには別のリポジトリを利用：全て一つの場所で管理しない
+      \item[※] Private（非公開）に設定する
+      \item[※] プロジェクト単位でリポジトリを作成：全て一つの場所で管理しない
     \end{itemize}
-    \item コードを保存しているディレクトリを登録
-    \item ファイル編集\(\to\) \git{add} \(\to\) \git{commit} \(\to\) \git{push}
+    \item リポジトリをローカルに\git{clone}
+    \item フォルダにファイルを追加\(\to\) \git{add} \(\to\) \git{commit} \(\to\) \git{push}
     \begin{itemize}
-      \item[※] 見返してわかりやすい「commitメッセージ」をつける
+      \item[※] 見返したときわかりやすいcommitメッセージをつける
     \end{itemize}
-    \item GitHubのページを確認し，コードが変更されていることを確認
+    \item GitHubでリモートリポジトリを確認し，コードを確認
   \end{enumerate}
+  \begin{beamercolorbox}[rounded=true]{advanced}
+    \footnotesize{
+      ssh接続やエディタでGit関連の拡張機能を設定しておくと便利
+      }
+  \end{beamercolorbox}
 \end{frame}
 
 \section{便利なGitコマンド}
 \begin{frame}{\insertsection}
-  \begin{block}{\git{git checkout .}}
-    作業ツリーの変更点を破棄，ステージングエリアの状態を回復
+  \begin{block}{\git{git commit --amend}}
+    一旦ローカルリポジトリに登録したコミットを修正
   \end{block}
   \begin{block}{\git{git stash}}
     現在の作業内容を退避し，ステージングエリアの状態を回復
 
-    対比した状態は任意に回復できる
+    退避した状態は呼び出せる
   \end{block}
-  \begin{block}{\git{git commit --amend}}
-    一旦ローカルリポジトリに登録したコミットを修正
+  \begin{block}{\git{git checkout .}}
+    作業ツリーの変更点を破棄，ステージングエリアの状態を回復
+
+    ローカルリポジトリに登録された変更点を破棄：\git{git reset --hard}
   \end{block}
   \begin{block}{\git{git reflog}}
-    \git{git ***}のコマンドログを確認
+    Gitのコマンドログを確認
   \end{block}
 
   % その他， \git{git revert} \git{git reset}
@@ -203,18 +238,19 @@
 
 \section{リンク集}
 \begin{frame}{\insertsection}
-  \begin{block}{よみやすい順}
+  \begin{block}{読みやすい順}
     \begin{itemize}
       \item \href{https://backlog.com/ja/git-tutorial/}{サルでもわかるGit入門}
-      \begin{itemize}
-        \item 「まずGitの勉強をしたい」ときにおすすめします．豊富な（かわいい）絵で説明されているので，かなりとっつきやすいと思います．
-      \end{itemize}
       \item \href{https://www.slideshare.net/matsukaz/git-28304397}{いつやるの？Git入門 v1.1.0}
+      \item \href{https://www.slideshare.net/FromAtom/github-26243260}{Github勉強会}
       \item \href{https://git-scm.com/book/ja/v2}{Pro Git book（日本語版）}
-      \begin{itemize}
-        \item 有名なGitの書籍で，オンラインで読むことができます（PDFもダウンロードできます）．Linuxでのコマンド操作をベースに解説されており，やや敷居が高いかもしれませんが，とてもよい資料と思います．
-      \end{itemize}
       \item \href{https://www.slideshare.net/kotas/git-15276118}{こわくない Git}
+    \end{itemize}
+  \end{block}
+  \begin{block}{For VSCodeユーザー}
+    \begin{itemize}
+      \item \href{https://qiita.com/jesus_isao/items/63557eba36819faa4ad9}{君には1時間でGitについて知ってもらう(with VSCode)}
+      \item \href{https://qiita.com/y-tsutsu/items/2ba96b16b220fb5913be}{VSCodeでのGitの基本操作まとめ}
     \end{itemize}
   \end{block}
   何か疑問・質問があればslackの \texttt{\#50\_github} まで！
