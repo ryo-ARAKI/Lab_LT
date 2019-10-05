@@ -44,3 +44,11 @@ Slides and information for lightning talk in laboratory
   - PyCharm
 - iPad&ssh接続
 - 公式ドキュメントのすすめ
+- スパコンの使い方
+  - スカラー型・ベクトル型
+    - JAXAのFX100，阪大のNX，京大のマシンなどを分類
+  - ジョブの投入・管理
+  - 並列化
+  - チューニング
+- make/cmakeを使ったコンパイル
+  - 複雑なコンパイルオプションやライブラリへのリンクを保存しておける
