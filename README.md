@@ -52,3 +52,4 @@ Slides and information for lightning talk in laboratory
   - チューニング
 - make/cmakeを使ったコンパイル
   - 複雑なコンパイルオプションやライブラリへのリンクを保存しておける
+- beamerを使ったプレゼンテーション作成
